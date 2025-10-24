@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laptop Product Categories</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+    }
+
+    .container {
+      width: 90%;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 50px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card img {
+      width: 130px;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 18px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #cart-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 1100;
+    }
+
+    #cart-icon a {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100%;
+      background-color: #f8f8f8;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+      padding: 20px;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .clear-cart-btn {
+      margin-top: 10px;
+      background-color: #dc3545;
+    }
+
+    .clear-cart-btn:hover {
+      background-color: #a51e2d;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cart Icon -->
+  <div id="cart-icon">
+    <a onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</a>
+  </div>
+
+  <!-- Product Cards -->
+  <div class="container">
+    <!-- Samsung -->
+    <div class="card">
+      <img src="./image copy/HP.jpg" alt="hp">
+      <a href="#">HP</a>
+      <p>HP Galaxy Book 3 (16GB RAM, 512GB SSD)</p>
+      <p>₹68,000</p>
+      <button onclick="addToCart('Samsung Galaxy Book 3', 68000)">Add to Cart</button>
+      <button onclick="buyNow('Samsung Galaxy Book 3', 68000)">Buy Now</button>
+    </div>
+
+    <!-- ASUS -->
+    <div class="card">
+      <img src="./image copy/dell.jpg" alt="dell">
+      <a href="#">DELL</a>
+      <p>Dell Galaxy Book 3 (16GB RAM, 512GB SSD)</p>
+      <p>₹42,000</p>
+      <button onclick="addToCart('ASUS VivoBook 15', 42000)">Add to Cart</button>
+      <button onclick="buyNow('ASUS VivoBook 15', 42000)">Buy Now</button>
+    </div>
+
+    <!-- HP -->
+    <div class="card">
+      <img src="./image copy/lenevo.jpg" alt="lenevo">
+      <a href="#">LENEVO</a>
+      <p>Lenevo Pavilion x360 (Intel i7, 16GB RAM,)</p>
+      <p>₹75,000</p>
+      <button onclick="addToCart('HP Pavilion x360', 75000)">Add to Cart</button>
+      <button onclick="buyNow('HP Pavilion x360', 75000)">Buy Now</button>
+    </div>
+
+   
+     <!-- ASUS -->
+    <div class="card">
+      <img src="./image copy/asus.jpg" alt="ASUS Laptop">
+      <a href="#">ASUS</a>
+      <p>Asus VivoBook 15 (i5, 8GB RAM, 512GB SSD)</p>
+      <p>₹42,000</p>
+      <button onclick="addToCart('ASUS VivoBook 15', 42000)">Add to Cart</button>
+      <button onclick="buyNow('ASUS VivoBook 15', 42000)">Buy Now</button>
+    </div> <!-- ASUS -->
+    <div class="card">
+      <img src="./image copy/acer.jpg" alt="acer Laptop">
+      <a href="#">ACER</a>
+    </br>
+      <p>Acer 15 (8GB RAM, 512GB SSD)</p>
+      <p>₹42,000</p>
+      <button onclick="addToCart('ASUS VivoBook 15', 42000)">Add to Cart</button>
+      <button onclick="buyNow('ASUS VivoBook 15', 42000)">Buy Now</button>
+    </div>
+
+    
+
+  <!-- Cart Sidebar -->
+  <div id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="close-btn" onclick="toggleCart()">×</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="total" id="total"></div>
+    <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+  </div>
+
+  <!-- JavaScript for Cart -->
+  <script>
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+      displayCart();
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+    }
+
+    function clearCart() {
+      localStorage.removeItem('cart');
+      displayCart();
+    }
+
+    function toggleCart() {
+      const sidebar = document.getElementById('cartSidebar');
+      sidebar.classList.toggle('open');
+      displayCart();
+    }
+
+    function displayCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartDiv = document.getElementById('cart-items');
+      const totalDiv = document.getElementById('total');
+      const cartCount = document.getElementById('cart-count');
+
+      cartDiv.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartDiv.innerHTML = '<p>Your cart is empty.</p>';
+        totalDiv.innerHTML = '';
+        cartCount.textContent = '0';
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        cartDiv.innerHTML += `
+          <div class="cart-item">
+            ${item.name} - ₹${item.price}
+            <button onclick="removeFromCart(${index})">Remove</button>
+          </div>
+        `;
+      });
+
+      totalDiv.innerHTML = `Total: ₹${total}`;
+      cartCount.textContent = cart.length;
+    }
+
+    function buyNow(name, price) {
+      localStorage.setItem('buyNow', JSON.stringify({ name, price }));
+      window.location.href = 'buy.html';
+    }
+
+    window.onload = function () {
+      displayCart();
+    };
+  </script>
+</body>
+</html>

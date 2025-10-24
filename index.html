@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manohari  | Web Developer Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background-color: #f9f9f9;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .navbar {
+      position: fixed;
+      width: 100%;
+      background-color: #fff;
+      padding: 1rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 9999;
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #007bff;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+   
+    .hero-text {
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.2s forwards;
+    }
+
+    .hero-text h1,
+    .hero-text p {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 0.15em solid #ffd700;
+      width: 0;
+      opacity: 1;
+      animation:
+        typing 2.2s steps(30, end) 0.5s forwards,
+        blink-caret 0.7s step-end infinite;
+    }
+
+    .hero-text h1 {
+      animation-delay: 0.5s;
+      animation-duration: 2.2s;
+    }
+
+    .hero-text p {
+      animation-delay: 2.8s;
+      animation-duration: 1.5s;
+      border-right: none;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      0%, 100% { border-color: transparent }
+      50% { border-color: #ffd700 }
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+      background-size: 200% 200%;
+      animation: gradientMove 8s ease-in-out infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+
+        .hero-buttons a,
+    .btn {
+      box-shadow: 0 0 0 rgba(0,123,255,0);
+      transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), background-color 0.3s;
+    }
+
+    .hero-buttons a:hover,
+    .btn:hover {
+      box-shadow: 0 0 18px 4px #ffd70080, 0 2px 8px #007bff40;
+    }
+    .hero {
+      padding: 120px 0 80px;
+      height: 730px;
+      background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+      color: #fff;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text h1 span {
+      color: #ffd700;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons a {
+      text-decoration: none;
+      padding: 0.75rem 1.75rem;
+      border-radius: 30px;
+      font-weight: 600;
+      margin-right: 1rem;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #ffd700;
+      color: #222;
+    }
+
+    .btn-primary:hover {
+      background-color: #ffcc00;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+    }
+
+    .btn-secondary:hover {
+      background-color: #fff;
+      color: #007bff;
+    }
+
+    .hero-image img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+        .section {
+      padding: 80px 0;
+      background-color: #fff;
+    }
+
+    .about h2,
+    .projects h2,
+    .skills h2,
+    .contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #222;
+    }
+
+    .about-content {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .profile-pic {
+      width: 250px;
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      object-fit: cover;
+    }
+
+    .about-text {
+      max-width: 600px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .about-text p {
+      margin-bottom: 1rem;
+    }
+
+    .about-text .btn-primary {
+      margin-top: 1.5rem;
+    }
+
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-info {
+      padding: 1rem 1.5rem;
+    }
+
+    .project-info h3 {
+      margin-bottom: 0.5rem;
+      color: #007bff;
+    }
+
+    .project-info p {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+      color: #555;
+    }
+
+    .project-tech {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .project-links a {
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      margin-right: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-outline {
+      border: 2px solid #007bff;
+      color: #007bff;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .btn-secondary:hover {
+      background-color: #0056b3;
+      color: #fff;
+    }
+
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+      justify-items: center;
+    }
+
+    .skill-item {
+      color: #007bff;
+      padding: 0.7rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .contact-form button {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 30px;
+      background-color: #007bff;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #0056b3;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      text-decoration: none;
+      color: #007bff;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .social-links a:hover {
+      text-decoration: underline;
+    }
+
+    
+    @media (max-width: 900px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-image img {
+        max-width: 300px;
+        margin: 1.5rem auto 0;
+      }
+
+      .about-content {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 1.5rem;
+        background: #fff;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        width: 180px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+      .hero-text p {
+        font-size: 1rem;
+      }
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .skill-item {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+      .social-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">MANOHARI ELANGODURAI</div>
+     
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="hamburger" id="hamburger">&#9776;</div>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>Hi, I'm <span>MANOHARI</span></h1>
+        <p>I transform ideas into elegant and functional web applications.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Contact Me</a>
+          <a href="#projects" class="btn btn-secondary">View Portfolio</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        
+      </div>
+    </div>
+  </section>
+
+<section id="about" class="about section">
+  <div class="container">
+    <br><br>
+    <h2>About Me</h2>
+    <div class="about-content">
+      <img src="image copy\mano.jpg" alt="Manohari" class="profile-pic" />
+      <div class="about-text">
+        <p>
+          Hi, I am MANOHARI. I am proficient in HTML, CSS, JavaScript, and Bootstrap, 
+          with a strong passion for web development. I also have a solid foundation in SQL 
+          and am continuously upgrading my skills. I am eager to contribute my knowledge 
+          and enthusiasm to support the growth and success of your organization.
+        </p>
+
+        <a href="MANOHARI ELANGODURAI (2).pdf" download class="btn btn-primary">Download Resume</a>
+
+        <button id="introBtn" class="btn btn-secondary">Intro</button>
+
+        <div id="introVideo" style="display:none; margin-top:20px;">
+          <iframe width="560" height="315" 
+            src="https://youtu.be/U8rOD95Z9qU" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="projects section">
+    <div class="container">
+      <br> <br>
+      <br>
+      <h2>Featured Projects</h2>
+      <br><br>
+      <div class="projects-grid">
+ <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-info">
+            <!--h3>Project Two</h3-->
+            <p>An e-commerce website is an online platform where businesses showcase products or services.
+               It allows customers to browse, purchase, and pay securely over the internet.</p> 
+            <div class="project-tech">HTML | CSS | JavaScript</div>
+            <div class="project-links">
+              
+              <a href="index copy.html" target="_self" rel="noopener" class="btn btn-secondary">Live Demo</a>
+              <a href="https://github.com/manohari0714" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-info">
+            <!--h3>Project One</h3-->
+            <p>Created a scientific calculator project with responsive design and advanced mathematical functions using front-end technologies.</p>
+            <div class="project-tech">HTML | CSS | JavaScript</div>
+            <div class="project-links">
+              <a href="Scientific Calculator.html" target="_blank" rel="noopener" class="btn btn-secondary">Live Demo</a>
+              <a href="https://github.com/manohari0714" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i> GitHub</a>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="skills section">
+    <div class="container">
+      <br> <br>
+      <br>
+      <h2>Skills & Tech Stack</h2>
+      <br> <br> <br>
+      <div class="skills-grid">
+        <br>
+        <br>
+        <p class="skill-item"><i class="fa-brands fa-html5"></i> HTML5</p>
+        <p class="skill-item"><i class="fa-brands fa-css3-alt"></i> CSS3</p>
+        <p class="skill-item"><i class="fa-brands fa-bootstrap"></i> Bootstrap</p>
+        <p class="skill-item"><i class="fa-brands fa-js"></i> JavaScript</p>
+        <p class="skill-item"><i class="fa-solid fa-database"></i> SQL</p>
+        <p class="skill-item"><i class="fa-brands fa-java"></i> Java</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact section">
+    <div class="container">
+      <br> <br> <br> <br>
+      <br>
+      <br>
+      <h2>Contact Me</h2>
+      <form action="https://formspree.io/f/mwprddpp" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="_replyto" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+      <p class="mt-3">📧 Email: 
+      <a href="mailto:manoharibsccs@gmail.com" style="color:#00e6e6;">manoharibsccs@gmail.com</a>
+    </p>
+  
+      <div class="social-links">
+        <a href="https://github.com/manohari0714" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://www.linkedin.com/in/manohari-elangodurai?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="https://manoharibsccs@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i> Email</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  
+  const introBtn = document.getElementById("introBtn");
+  const introVideo = document.getElementById("introVideo").querySelector("iframe");
+
+  introBtn.addEventListener("click", () => {
+    
+    introVideo.src="https://www.youtube.com/embed/U8rOD95Z9qU";
+    document.getElementById("introVideo").style.display = "block";
+  });
+  </script>
+</body>
+</html>
+

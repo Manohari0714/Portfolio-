@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scientific Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #eef2f3;
+      padding: 10px;
+    }
+
+    .calculator {
+      background: #f2f4f7;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 8px 8px 15px #cfd3d8,
+                  -8px -8px 15px #ffffff;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .display {
+      width: 100%;
+      height: 70px;
+      background: #fff;
+      border: none;
+      border-radius: 10px;
+      box-shadow: inset 3px 3px 6px #cfd3d8,
+                  inset -3px -3px 6px #ffffff;
+      text-align: right;
+      font-size: 2rem;
+      padding: 10px;
+      margin-bottom: 20px;
+      outline: none;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #fff;
+      box-shadow: 3px 3px 6px #cfd3d8,
+                  -3px -3px 6px #ffffff;
+      transition: 0.2s;
+    }
+
+    button:active {
+      box-shadow: inset 3px 3px 6px #cfd3d8,
+                  inset -3px -3px 6px #ffffff;
+    }
+
+    /* Special Colors */
+    .clear { background: #ff5c8d; color: #fff; }
+    .ac { background: #4cd137; color: #fff; }
+    .equal { background: #0097e6; color: #fff; }
+
+    /* Mobile view */
+    @media (max-width: 600px) {
+      .buttons {
+        grid-template-columns: repeat(3, 1fr); /* neatly stacks */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <input type="text" class="display" id="display" disabled value="0">
+    <div class="buttons">
+      <button class="clear">DEL</button>
+      <button onclick="insert('')">xʸ</button>
+      <button onclick="insert('(')">(</button>
+      <button onclick="insert(')')">)</button>
+      <button onclick="insert('%')">%</button>
+      <button class="ac">AC</button>
+
+      <button onclick="insertFunction('sin')">sin</button>
+      <button onclick="insert('Math.PI')">π</button>
+      <button onclick="insert('7')">7</button>
+      <button onclick="insert('8')">8</button>
+      <button onclick="insert('9')">9</button>
+      <button onclick="insert('-')">−</button>
+
+      <button onclick="insertFunction('cos')">cos</button>
+      <button onclick="insertFunction('log')">log</button>
+      <button onclick="insert('4')">4</button>
+      <button onclick="insert('5')">5</button>
+      <button onclick="insert('6')">6</button>
+      <button onclick="insert('*')">×</button>
+
+      <button onclick="insertFunction('tan')">tan</button>
+      <button onclick="insertFunction('sqrt')">√</button>
+      <button onclick="insert('1')">1</button>
+      <button onclick="insert('2')">2</button>
+      <button onclick="insert('3')">3</button>
+      <button onclick="insert('/')">÷</button>
+
+      <button onclick="insert('Math.E')">e</button>
+      <button onclick="insert('0')">0</button>
+      <button onclick="insert('.')">.</button>
+      <button class="equal">=</button>
+      <button onclick="insert('+')">+</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById("display");
+
+    function insert(value) {
+      if (display.value === "0") display.value = "";
+      display.value += value;
+    }
+
+    function insertFunction(func) {
+      if (func === "sin") display.value += "Math.sin(";
+      if (func === "cos") display.value += "Math.cos(";
+      if (func === "tan") display.value += "Math.tan(";
+      if (func === "log") display.value += "Math.log(";
+      if (func === "sqrt") display.value += "Math.sqrt(";
+    }
+
+    document.querySelector(".equal").addEventListener("click", () => {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = "Error";
+      }
+    });
+
+    document.querySelector(".clear").addEventListener("click", () => {
+      display.value = display.value.slice(0, -1) || "0";
+    });
+
+    document.querySelector(".ac").addEventListener("click", () => {
+      display.value = "0";
+    });
+  </script>
+
+</body>
+</html>

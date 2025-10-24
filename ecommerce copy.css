@@ -1,0 +1,153 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background: #fff;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin: 0 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.icons span {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #cde0e6;
+  padding: 50px;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  max-width: 500px;
+}
+
+.hero-text h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.hero-text p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.hero-text button {
+  padding: 10px 20px;
+  border: none;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hero-img img {
+  width: 300px;
+}
+.search-bar {
+      text-align: center;
+      padding: 15px;
+      background-color: #eee;
+    }
+
+    .search-bar input {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+/* Product Section */
+.products {
+  padding: 50px 30px;
+  text-align: center;
+}
+
+.products h2 {
+  margin-bottom: 40px;
+  font-size: 28px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.product img {
+  width: 100px;
+  margin-bottom: 15px;
+}
+
+.product .name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.product .price {
+  font-size: 14px;
+  color: #666;
+}  
+
+/* Search bar styling */
+.search-bar {
+  text-align: center;
+  margin: 20px;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 250px;
+  border: 2px solid #333;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  padding: 10px 15px;
+  margin-left: 5px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background: #555;
+}

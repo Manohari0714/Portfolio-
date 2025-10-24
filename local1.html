@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIBRARY</title>
+    <link rel="icon" href="photos/book.avif">
+    <style>
+        body{
+            background-image: url("images/background image.jpg");
+            background-size: cover;
+        }
+    
+        button{
+            margin-top: 40px;
+            background-color: rgba(204, 160, 160, 0.589);
+            color: white;
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            margin-left: 200px;
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm">
+       
+        <input type="text" id="username" required />
+        <input type="password" id="password" required />
+
+      <button type="submit">Login</button>
+</form>
+  </div>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const enteredUsername = document.getElementById('username').value;
+    const registeredUsername = localStorage.getItem('registeredUser');
+    const enteredPassword=document.getElementById('password').value;
+    const registeredPassword=localStorage.getItem('userPassword');
+
+    if (enteredUsername === registeredUsername && enteredPassword===registeredPassword) {
+         window.location.href = 'aaa.html';
+    } else {
+        alert(' error');
+    }
+});
+</script>
+</body>
+</html>

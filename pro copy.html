@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Categories</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+    }
+
+    .container {
+      width: 90%;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 50px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 10px 0;
+    }
+
+    .card img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 16px;
+      display: block;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #cart-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 1100;
+    }
+
+    #cart-icon a {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100%;
+      background-color: #f8f8f8;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+      padding: 20px;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .clear-cart-btn {
+      margin-top: 10px;
+      background-color: #dc3545;
+    }
+
+    .clear-cart-btn:hover {
+      background-color: #a51e2d;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cart-icon">
+    <a onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</a>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <img src="./image copy/samsung.png" alt="Samsung">
+      <a href="#">SAMSUNG</a>
+      <p>Samsung Galaxy (432GB Storage, 16GB RAM, Blue)</p>
+      <p>₹15,000</p>
+      <button onclick="addToCart('Samsung Galaxy', 15000)">Add to Cart</button>
+      <button onclick="buyNow('Samsung Galaxy', 15000)">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <img src="image copy/VIVO.png" alt="Vivo">
+      <a href="#">VIVO</a>
+      <p>Vivo Pro 5G (8GB RAM, 256GB)</p>
+      <p>₹12,000</p>
+      <button onclick="addToCart('Vivo V40 Pro', 12000)">Add to Cart</button>
+      <button onclick="buyNow('Vivo V40 Pro', 12000)">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <img src="./image copy/IPHONE.png" alt="iPhone">
+      <a href="#">IPHONE</a>
+      <p>iPhone 16 (256GB Storage, Pink)</p>
+      <p>₹50,000</p>
+      <button onclick="addToCart('iPhone 16', 50000)">Add to Cart</button>
+      <button onclick="buyNow('iPhone 16', 50000)">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <img src="./image copy/REALME.png" alt="Realme">
+      <a href="#">REALME</a>
+      <p>Realme 11 5G (154GB, 8GB RAM)</p>
+      <p>₹20,000</p>
+      <button onclick="addToCart('Realme 11 Pro', 20000)">Add to Cart</button>
+      <button onclick="buyNow('Realme 11 Pro', 20000)">Buy Now</button>
+    </div>
+  </div>
+
+  <div id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="close-btn" onclick="toggleCart()">×</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="total" id="total"></div>
+    <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+  </div>
+
+  <script>
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+      displayCart();
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+    }
+
+    function clearCart() {
+      localStorage.removeItem('cart');
+      displayCart();
+    }
+
+    function toggleCart() {
+      const sidebar = document.getElementById('cartSidebar');
+      sidebar.classList.toggle('open');
+      displayCart();
+    }
+
+    function displayCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartDiv = document.getElementById('cart-items');
+      const totalDiv = document.getElementById('total');
+      const cartCount = document.getElementById('cart-count');
+
+      cartDiv.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartDiv.innerHTML = '<p>Your cart is empty.</p>';
+        totalDiv.innerHTML = '';
+        cartCount.textContent = '0';
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        cartDiv.innerHTML += `
+          <div class="cart-item">
+            ${item.name} - ₹${item.price}
+            <button onclick="removeFromCart(${index})">Remove</button>
+          </div>
+        `;
+      });
+
+      totalDiv.innerHTML = `Total: ₹${total}`;
+      cartCount.textContent = cart.length;
+    }
+
+    function buyNow(name, price) {
+      localStorage.setItem('buyNow', JSON.stringify({ name, price }));
+      window.location.href = 'buy.html';
+    }
+
+    window.onload = function () {
+      displayCart();
+    };
+  </script>
+</body>
+</html>
